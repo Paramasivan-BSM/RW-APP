@@ -1,37 +1,34 @@
-.ProductTitle{
-margin-top: 30px;
-margin-left: 15px;
-}
 
-.PC-1 > .ProductDescription{
-
-margin-left: 15px;
-
-}
-
-.PC-1 > .ProductPrice{
-
+ .ProductTitle {
+    margin-top: 30px;
     margin-left: 15px;
-
 }
 
-.PC-1 > .ProductStock{
+.PC-1 .ProductDescription {
+    margin-left: 15px;
+}
 
+.PC-1 .ProductPrice {
+    margin-left: 15px;
+}
+
+.PC-1 .ProductStock {
     margin-left: 15px;
     margin-top: 10px;
 }
 
-.PC-1 > .ProductStock > .Product_Add_Btn_1{
-
+.PC-1 .ProductStock .Product_Add_Btn_1 {
     background-color: royalblue;
     color: whitesmoke;
     border-radius: 3px;
     border-style: none;
-    
 }
 
-.PC-1 > .ProductStock > .StockDetails{
-
+.PC-1 .ProductStock .StockDetails {
     margin: 5px;
 }
 
+.ProductImage {
+    height: 50px;
+    margin-top: 10px;
+}
