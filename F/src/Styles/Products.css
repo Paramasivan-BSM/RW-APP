@@ -22,6 +22,7 @@
     color: whitesmoke;
     border-radius: 3px;
     border-style: none;
+    
 }
 
 .PC-1 .ProductStock .StockDetails {
@@ -31,4 +32,12 @@
 .ProductImage {
     height: 50px;
     margin-top: 10px;
+}
+
+.PC-1 .col-10 > span{
+
+    margin-left: 100px;
+
+
+
 }
