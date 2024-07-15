@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 import "../../Styles/Products.css";
 import { Btn } from "./Button";
 
-let BoxStyle = {
+let boxStyle = {
   minHeight: "200px",
   minWidth: "200px",
   backgroundColor: "whitesmoke",
@@ -10,48 +10,61 @@ let BoxStyle = {
 };
 
 export const Products = (props) => {
-  let ProductStockInfo = props.SingleProduct.isAvailable ? "Available" : "Unavailable";
+  // Create a state to track the stock of all products
+  const [productStocks, setProductStocks] = useState(
+    props.products.map(() => 0)
+  );
 
-  let [ProductStock, SetProductStock] = useState(0);
-
-  let Add = () => {
-    SetProductStock(ProductStock + 1);
+  const add = (index) => {
+    const newProductStocks = [...productStocks];
+    newProductStocks[index] += 1;
+    setProductStocks(newProductStocks);
   };
 
-  let Sub = () => {
-    SetProductStock(ProductStock - 1);
+  const sub = (index) => {
+    const newProductStocks = [...productStocks];
+    newProductStocks[index] -= 1;
+    setProductStocks(newProductStocks);
   };
 
   return (
     <div className="row">
-      <div className="col PC-1" style={BoxStyle}>
-        <div className="row">
-          <div className="col-10">
-            <h3 className="ProductTitle">{props.SingleProduct.name}</h3>
-            <p className="ProductDescription">{props.SingleProduct.description}</p>
-            <h5 className="ProductPrice" style={{ display: "inline" }}>
-              Price: {props.SingleProduct.price}
-            </h5>
-            <span
-              className={
-                ProductStockInfo === "Available"
-                  ? "bg-success p-1 rounded text-white"
-                  : "bg-danger p-1 rounded text-white"
-              }
-            >
-              {ProductStockInfo}
-            </span>
-            <div className="ProductStock">
-              <Btn children="-" EventHandler={Sub} />
-              <span className="StockDetails">{ProductStock}</span>
-              <Btn children="+" EventHandler={Add} />
+      {props.products.map((product, index) => {
+        let productStockInfo = product.isAvailable ? "Available" : "Unavailable";
+
+        return (
+          <div className="col PC-1" style={boxStyle} key={product.PID}>
+            <div className="row">
+              <div className="col-10">
+                <h3 className="ProductTitle">{product.Name}</h3>
+                <p className="ProductDescription">{product.Desc}</p>
+                <h5 className="ProductPrice" style={{ display: "inline" }}>
+                  Price: {product.Price}
+                </h5>
+                <span
+                  className={
+                    productStockInfo === "Available"
+                      ? "bg-success p-1 rounded text-white"
+                      : "bg-danger p-1 rounded text-white"
+                  }
+                >
+                  {productStockInfo}
+                </span>
+                <div className="ProductStock">
+                  <Btn children="-" EventHandler={() => sub(index)} />
+                  <span className="StockDetails">{productStocks[index]}</span>
+                  <Btn children="+" EventHandler={() => add(index)} />
+                </div>
+              </div>
+              <div className="col-2">
+                {product.Image && (
+                  <img src={URL.createObjectURL(product.Image)} alt="" className="ProductImage img-fluid" />
+                )}
+              </div>
             </div>
           </div>
-          <div className="col-2">
-            <img src={URL.createObjectURL(props.SingleProduct.image)} alt="" className="ProductImage img-fluid" />
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 };

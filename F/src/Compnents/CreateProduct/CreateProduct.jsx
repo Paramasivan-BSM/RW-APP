@@ -19,7 +19,7 @@ export const CreateProduct = (props) => {
       image,
     };
 
-    props.CreateProd(Product);
+    props.createProd(Product);
 
     setName("");
     setPrice("");

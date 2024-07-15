@@ -1,18 +1,29 @@
-import { useState, useEffect } from "react";
-import {CreateProduct} from "./Compnents/CreateProduct/CreateProduct";
-import {Products} from "./Compnents/ProductList/Products";
+import { useState } from "react";
+import { CreateProduct } from "./Compnents/CreateProduct/CreateProduct";
+import { Products } from "./Compnents/ProductList/Products";
+
+const initialProducts = [
+  {
+    PID: 1,
+    Name: "Curd",
+    Desc: "Nothing",
+    isAvailable: true,
+    Image: "",
+    Price: 40
+  }
+];
 
 function App() {
-  let [SingleProduct, setSingleProduct] = useState(null);
+  let [products, setProducts] = useState(initialProducts);
 
-  let CreateProd = (product) => {
-    setSingleProduct(product);
+  let createProd = (product) => {
+    setProducts([product, ...products]);
   };
 
   return (
     <>
-      <CreateProduct CreateProd={CreateProd} />
-      {SingleProduct && <Products SingleProduct={SingleProduct} />}
+      <CreateProduct createProd={createProd} />
+      <Products products={products} />
     </>
   );
 }
